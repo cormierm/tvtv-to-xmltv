@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "2be784fe-05b7-4d5f-aa1c-d94e6e94fed7",
+		"name": "TvtvToXMLTV",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "tvtv.ca Listings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "sdgfasdf"
+			},
+			"response": []
+		},
+		{
+			"name": "tvtvToXmlTV",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
