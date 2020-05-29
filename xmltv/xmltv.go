@@ -8,7 +8,7 @@ import (
 	"tvtvToXmltv/tvtv"
 )
 
-var DateTimeLayout string = "20060102150405 -0700"
+var DateTimeLayout = "20060102150405 -0700"
 
 type Channel struct {
 	XMLName xml.Name `xml:"channel"`
