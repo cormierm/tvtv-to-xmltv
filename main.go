@@ -1,8 +1,6 @@
 package main
 
 import (
-	"encoding/json"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"text/template"
@@ -24,35 +22,18 @@ func main() {
 func xmltvHandlerFunc(w http.ResponseWriter, req *http.Request) {
 	log.Printf("[%v] Requesting TvtvListToXmlTV\n", req.RemoteAddr)
 
-	tvtvList := getTvtvListing()
-
-	xml := xmltv.TvtvToXMLTV(tvtvList)
-
-	err := tpl.ExecuteTemplate(w, "xmltv.goxml", xml)
+	tvtvListing, err := tvtv.FetchListing()
 	if err != nil {
-		log.Println(err)
-	}
-}
-
-func getTvtvListing() tvtv.Tvtv {
-	tvtvUrl := "https://tvtv.ca/tvm/t/tv/v4/lineups/3003/listings/grid?start=2020-05-28&end=2020-05-30"
-
-	resp, err := http.Get(tvtvUrl)
-	if err != nil {
-		log.Println(err)
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
 	}
 
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	xml := xmltv.TvtvToXMLTV(tvtvListing)
+
+	err = tpl.ExecuteTemplate(w, "xmltv.goxml", xml)
 	if err != nil {
 		log.Println(err)
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
 	}
-
-	var tvtvList tvtv.Tvtv
-	err = json.Unmarshal(body, &tvtvList)
-	if err != nil {
-		log.Println(err)
-	}
-
-	return tvtvList
 }
