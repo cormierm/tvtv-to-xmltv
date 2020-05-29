@@ -1,6 +1,12 @@
-# TvtvToXMLTV
+# TvtvToXmlTV
 
 Creates http endpoint that grabs tv guide listing from tvtv.ca and returns xml in xmltv format.
+
+### Example
+
+http://[host ip:6060]?days=7&location=3003
+
+This will get 7 days of tv guide from tvtv.ca for location 3003 (Broadcast - Kitchener).
 
 ### Run in docker
 Run the following commands:
