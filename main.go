@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"time"
 	"tvtvToXmltv/tvtv"
+	"tvtvToXmltv/xmltv"
 )
 
 func getTvtvListingToXmlTV(w http.ResponseWriter, req *http.Request) {
@@ -25,67 +26,7 @@ func main() {
 func getXml() string {
 	tvtvList := getTvtvListing()
 
-	type XmlChannel struct {
-		XMLName xml.Name `xml:"channel"`
-		Id      string   `xml:"id,attr"`
-		Name    []string   `xml:"display-name"`
-		Icon        struct {
-			Text string `xml:",chardata"`
-			Src  string `xml:"src,attr"`
-		} `xml:"icon"`
-	}
-
-	type XmlProgramme struct {
-		XMLName xml.Name `xml:"programme"`
-		Start   string   `xml:"start,attr"`
-		Stop    string   `xml:"stop,attr"`
-		Channel string   `xml:"channel,attr"`
-		Title   struct {
-			Text string `xml:",chardata"`
-			Lang string `xml:"lang,attr"`
-		} `xml:"title"`
-		SubTitle struct {
-			Text string `xml:",chardata"`
-			Lang string `xml:"lang,attr"`
-		} `xml:"sub-title"`
-		Desc struct {
-			Text string `xml:",chardata"`
-			Lang string `xml:"lang,attr"`
-		} `xml:"desc"`
-		Date     string `xml:"date"`
-		Category []struct {
-			Text string `xml:",chardata"`
-			Lang string `xml:"lang,attr"`
-		} `xml:"category"`
-		EpisodeNum []struct {
-			Text   string `xml:",chardata"`
-			System string `xml:"system,attr"`
-		} `xml:"episode-num"`
-		Audio struct {
-			Text   string `xml:",chardata"`
-			Stereo string `xml:"stereo"`
-		} `xml:"audio"`
-		PreviouslyShown struct {
-			Text  string `xml:",chardata"`
-			Start string `xml:"start,attr"`
-		} `xml:"previously-shown"`
-		Subtitles struct {
-			Text string `xml:",chardata"`
-			Type string `xml:"type,attr"`
-		} `xml:"subtitles"`
-	}
-
-	type XmlTv struct {
-		XMLName           xml.Name `xml:"tv"`
-		SourceInfoURL     string   `xml:"source-info-url,attr"`
-		SourceInfoName    string   `xml:"source-info-name,attr"`
-		GeneratorInfoName string   `xml:"generator-info-name,attr"`
-		GeneratorInfoURL  string   `xml:"generator-info-url,attr"`
-		Channels []*XmlChannel `xml:"channel"`
-		Programme []*XmlProgramme `xml:"programme"`
-	}
-
-	tv := &XmlTv{
+	tv := &xmltv.Tv{
 		SourceInfoURL: "http://localhost",
 		SourceInfoName: "My Tvtv to XmlTV",
 	}
@@ -98,7 +39,7 @@ func getXml() string {
 			channel.Channel.Callsign,
 		}
 
-		xmlChannel := &XmlChannel{
+		xmlChannel := &xmltv.Channel{
 			XMLName: xml.Name{},
 			Id:      id,
 			Name:    names,
@@ -111,7 +52,7 @@ func getXml() string {
 		}
 
 		for _, program := range channel.Listings {
-			xmlProgramme := &XmlProgramme{
+			xmlProgramme := &xmltv.Programme{
 				XMLName: xml.Name{},
 				Start:   convertTimestamp(program.ListDateTime),
 				Stop:    xmlStopTimestamp(program.ListDateTime, program.Duration),
