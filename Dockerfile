@@ -1,9 +1,15 @@
-FROM golang
+FROM golang:latest
 
-ADD . /go/src/github.com/cormierm/TvtvToXmlTV
+WORKDIR /app
 
-RUN go install github.com/cormierm/TvtvToXmlTV
+COPY go.mod ./
 
-ENTRYPOINT /go/bin/TvtvToXmlTV
+RUN go mod download
+
+COPY . .
+
+RUN go build -o main .
 
 EXPOSE 8080
+
+CMD ["./main"]

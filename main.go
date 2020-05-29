@@ -30,7 +30,7 @@ func xmltvHandlerFunc(w http.ResponseWriter, req *http.Request) {
 
 	xml := xmltv.TvtvToXMLTV(tvtvListing)
 
-	err = tpl.ExecuteTemplate(w, "xmltv.goxmsl", xml)
+	err = tpl.ExecuteTemplate(w, "xmltv.goxml", xml)
 	if err != nil {
 		log.Println(err)
 		http.Error(w, "Error ExecuteTemplate: " + err.Error(), http.StatusInternalServerError)
