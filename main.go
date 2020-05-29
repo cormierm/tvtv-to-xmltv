@@ -24,16 +24,16 @@ func xmltvHandlerFunc(w http.ResponseWriter, req *http.Request) {
 
 	tvtvListing, err := tvtv.FetchListing()
 	if err != nil {
-		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		http.Error(w, "Error tvtv.Fetching: " + err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	xml := xmltv.TvtvToXMLTV(tvtvListing)
 
-	err = tpl.ExecuteTemplate(w, "xmltv.goxml", xml)
+	err = tpl.ExecuteTemplate(w, "xmltv.goxmsl", xml)
 	if err != nil {
 		log.Println(err)
-		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		http.Error(w, "Error ExecuteTemplate: " + err.Error(), http.StatusInternalServerError)
 		return
 	}
 }
