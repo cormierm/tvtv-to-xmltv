@@ -1,5 +1,7 @@
 package tvtv
 
+var DateTimeLayout string = "2006-01-02 15:04:05"
+
 type Tvtv []struct {
 	Channel  Channel   `json:"channel"`
 	Listings []Listing `json:"listings"`
