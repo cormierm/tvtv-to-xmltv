@@ -1,11 +1,11 @@
 package main
 
 import (
+	"github.com/cormierm/TvtvToXmlTV/tvtv"
+	"github.com/cormierm/TvtvToXmlTV/xmltv"
 	"log"
 	"net/http"
 	"text/template"
-	"tvtvToXmltv/tvtv"
-	"tvtvToXmltv/xmltv"
 )
 
 var tpl *template.Template

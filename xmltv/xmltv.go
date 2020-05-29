@@ -3,9 +3,9 @@ package xmltv
 import (
 	"encoding/xml"
 	"fmt"
+	"github.com/cormierm/TvtvToXmlTV/tvtv"
 	"log"
 	"time"
-	"tvtvToXmltv/tvtv"
 )
 
 var DateTimeLayout = "20060102150405 -0700"
