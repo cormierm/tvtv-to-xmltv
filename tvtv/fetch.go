@@ -10,8 +10,8 @@ import (
 	"time"
 )
 
-func FetchListing() (Tvtv, error) {
-	tvtvUrl := generateTvtvUrl("3003", 1)
+func FetchListing(location string, days int) (Tvtv, error) {
+	tvtvUrl := generateTvtvUrl(location, days)
 
 	log.Printf("Fetching tvtv listing: %s\n", tvtvUrl)
 	resp, err := http.Get(tvtvUrl)
