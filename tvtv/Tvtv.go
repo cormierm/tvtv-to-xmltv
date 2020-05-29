@@ -1,11 +1,11 @@
-package model
+package tvtv
 
-type TvtvList []struct {
-	Channel TvtvChannel `json:"channel"`
-	Listings []TvtvListing `json:"listings"`
+type Tvtv []struct {
+	Channel  Channel   `json:"channel"`
+	Listings []Listing `json:"listings"`
 }
 
-type TvtvChannel struct {
+type Channel struct {
 		Name             string `json:"name"`
 		Number           string `json:"number"`
 		ChannelNumber    int    `json:"channelNumber"`
@@ -22,7 +22,7 @@ type TvtvChannel struct {
 		StationHD        bool   `json:"stationHD"`
 }
 
-type TvtvListing struct {
+type Listing struct {
 		ListingID        int    `json:"listingID"`
 		ListDateTime     string `json:"listDateTime"`
 		Duration         int    `json:"duration"`

@@ -8,7 +8,7 @@ import (
 	"log"
 	"net/http"
 	"time"
-	"tvtvToXmltv/model"
+	"tvtvToXmltv/tvtv"
 )
 
 func getTvtvListingToXmlTV(w http.ResponseWriter, req *http.Request) {
@@ -165,7 +165,7 @@ func getXml() string {
 	return 	"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><!DOCTYPE tv SYSTEM \"xmltv.dtd\">" + string(out)
 }
 
-func getTvtvListing() model.TvtvList {
+func getTvtvListing() tvtv.Tvtv {
 	tvtvUrl := "https://tvtv.ca/tvm/t/tv/v4/lineups/3003/listings/grid?start=2020-05-28&end=2020-05-30"
 
 	resp, err := http.Get(tvtvUrl)
@@ -179,7 +179,7 @@ func getTvtvListing() model.TvtvList {
 		log.Println(err)
 	}
 
-	var tvtvList model.TvtvList
+	var tvtvList tvtv.Tvtv
 	err = json.Unmarshal(body, &tvtvList)
 	if err != nil {
 		log.Println(err)
