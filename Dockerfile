@@ -2,14 +2,11 @@ FROM golang:latest
 
 WORKDIR /app
 
-COPY go.mod ./
+ADD templates /app/templates
 
-RUN go mod download
+ADD . /go/src/github.com/cormierm/TvtvToXmlTV
+RUN go install github.com/cormierm/TvtvToXmlTV
 
-COPY . .
-
-RUN go build -o main .
+ENTRYPOINT /go/bin/TvtvToXmlTV
 
 EXPOSE 8080
-
-CMD ["./main"]
