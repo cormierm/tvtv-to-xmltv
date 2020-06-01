@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/cormierm/TvtvToXmlTV/tvtv"
 	"github.com/cormierm/TvtvToXmlTV/xmltv"
 	"log"
@@ -25,8 +24,8 @@ func xmltvHandlerFunc(w http.ResponseWriter, req *http.Request) {
 	log.Printf("[%v] Requesting TvtvListToXmlTV\n", req.RemoteAddr)
 
 	query := req.URL.Query()
+
 	days := query.Get("days")
-	fmt.Println(days)
 	if days == "" {
 		http.Error(w, "Required parameter days is missing.", http.StatusUnprocessableEntity)
 		return
