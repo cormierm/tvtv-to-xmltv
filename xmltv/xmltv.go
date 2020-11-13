@@ -117,7 +117,7 @@ func TvtvToXMLTV(tvtvList tvtv.Tvtv) string {
 					Text string `xml:",chardata"`
 					Lang string `xml:"lang,attr"`
 				}{
-					program.Description + ".",
+					program.Description,
 					"en",
 				},
 				Date:       "2000-01-01",
