@@ -13,5 +13,5 @@ Run the following commands:
 
 ```
 docker build --tag tvtv-to-xmltv:1.0 .
-docker run --publish 6060:8080 --detach --name TvtvToXmlTV tvtv-to-xmltv:1.0
+docker run --publish 8080:8080 --detach --name tvtv-to-xmltv tvtv-to-xmltv:1.0
 ```
