@@ -42,7 +42,7 @@ func xmltvHandlerFunc(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	tvtvListing, err := tvtv.FetchListing(location, intDays)
+	tvtvListing, err := tvtv.FetchListing(location, intDays, query.Get("startchan"), query.Get("endchan"))
 	if err != nil {
 		http.Error(w, "Error tvtv.Fetching: " + err.Error(), http.StatusInternalServerError)
 		return

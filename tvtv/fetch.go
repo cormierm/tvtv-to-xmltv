@@ -10,8 +10,8 @@ import (
 	"time"
 )
 
-func FetchListing(location string, days int) (Tvtv, error) {
-	tvtvUrl := generateTvtvUrl(location, days)
+func FetchListing(location string, days int, startChan string, endChan string) (Tvtv, error) {
+	tvtvUrl := generateTvtvUrl(location, days, startChan, endChan)
 
 	log.Printf("Fetching tvtv listing: %s\n", tvtvUrl)
 	resp, err := http.Get(tvtvUrl)
@@ -38,7 +38,7 @@ func FetchListing(location string, days int) (Tvtv, error) {
 	return listing, nil
 }
 
-func generateTvtvUrl(locationId string, days int) string {
+func generateTvtvUrl(locationId string, days int, startChan string, endChan string) string {
 	urlTimeLayout := "2006-01-02 15:00:00"
 
 	start := time.Now().Format(urlTimeLayout)
@@ -47,6 +47,8 @@ func generateTvtvUrl(locationId string, days int) string {
 	params := url.Values{}
 	params.Add("start", start)
 	params.Add("end", end)
+	params.Add("startchan", startChan)
+	params.Add("endchan", endChan)
 
 	tvtvUrl := &url.URL{
 		Scheme:   "https",
